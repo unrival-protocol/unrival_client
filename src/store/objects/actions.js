@@ -2,6 +2,8 @@ import axios from 'axios'
 
 const host = `${process.env.VUE_APP_SERVER_PROTOCOL}://${process.env.VUE_APP_SERVER_ADDRESS}`
 const contextAddress = process.env.VUE_APP_CONTEXT
+console.log('the app context:')
+console.log(contextAddress)
 
 export function loadObject ({ context, commit }, data) {
   const endpoint = `${host}/object/${data.interpretation}/${data.address}`
@@ -45,9 +47,10 @@ export function createObject ({ context, commit }, data) {
 
 export function loadContext ({ context, commit }) {
   return new Promise(function (resolve, reject) {
-    axios.get(`${host}/object/context/${contextAddress}`)
+    axios.get(`${host}/context/${contextAddress}`)
       .then((response) => {
-        commit('updateContext', JSON.parse(response.data))
+        console.log(response.data)
+        commit('updateContext', response.data)
         resolve()
       })
       .catch((err) => {
@@ -58,7 +61,7 @@ export function loadContext ({ context, commit }) {
 
 export function isUnrivalObject ({ context, commit }, address) {
   return new Promise(function (resolve, reject) {
-    axios.get(`${host}/utility/read_object/${address}`)
+    axios.get(`${host}/${address.join('/')}`)
       .then((response) => {
         console.log(response)
         resolve()

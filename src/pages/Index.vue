@@ -2,6 +2,7 @@
   <q-page class="flex flex-center">
     <div>
       <h1>Unrival</h1>
+      {{ interpretations }}
     </div>
   </q-page>
 </template>
@@ -21,21 +22,21 @@ export default defineComponent({
   },
   mounted () {
     const {
-      loadContext,
-      parseUrl
+      loadContext
+      // parseUrl
     } = this
     loadContext()
-      .then(function () {
-        parseUrl()
-      })
-      .catch((err) => {
-        console.error(err)
-      })
+    .then(function () {
+       parseUrl()
+    })
+    .catch((err) => {
+      console.error(err)
+     })
   },
   methods: {
     ...mapActions('objects', ['loadContext', 'isUnrivalObject']),
     ...mapMutations('objects', ['setInterpretation', 'setAddress']),
-    inContext (ns) {
+    inContext (interpretation) {
       console.log(typeof this.interpretations)
       return ns in Object.keys(this.interpretations)
     },
