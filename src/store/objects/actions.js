@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 const host = `${process.env.VUE_APP_SERVER_PROTOCOL}://${process.env.VUE_APP_SERVER_ADDRESS}`
-const universeAddress = process.env.VUE_APP_UNIVERSE
+const contextAddress = process.env.VUE_APP_CONTEXT
 
 export function loadObject ({ context, commit }, data) {
-  const endpoint = `${host}/object/${data.namespace}/${data.address}`
+  const endpoint = `${host}/object/${data.interpretation}/${data.address}`
   console.log(endpoint)
   return axios.get(endpoint)
     .then((response) => {
@@ -17,7 +17,7 @@ export function loadObject ({ context, commit }, data) {
 }
 
 export function proveObject ({ commit }, data) {
-  const endpoint = `${host}/object/${data.namespace}/${data.address}/prove`
+  const endpoint = `${host}/object/${data.interpretation}/${data.address}/prove`
   return axios.get(endpoint)
     .then((response) => {
       // console.log(response.data)
@@ -30,24 +30,24 @@ export function proveObject ({ commit }, data) {
 
 export function createObject ({ context, commit }, data) {
   console.log(data)
-  const endpoint = `${host}/object/${data.namespace}/create`
+  const endpoint = `${host}/object/${data.interpretation}/create`
   console.log(endpoint)
   return axios.put(endpoint, data.payload)
     .then((response) => {
       console.log(response)
       console.log('successfully created object')
-      commit('updateUniverse', response.data)
+      commit('updateContext', response.data)
     })
     .catch((err) => {
       console.log(err)
     })
 }
 
-export function loadUniverse ({ context, commit }) {
+export function loadContext ({ context, commit }) {
   return new Promise(function (resolve, reject) {
-    axios.get(`${host}/object/universe/${universeAddress}`)
+    axios.get(`${host}/object/context/${contextAddress}`)
       .then((response) => {
-        commit('updateUniverse', JSON.parse(response.data))
+        commit('updateContext', JSON.parse(response.data))
         resolve()
       })
       .catch((err) => {

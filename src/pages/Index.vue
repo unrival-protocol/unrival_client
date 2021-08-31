@@ -14,17 +14,17 @@ import { mapMutations, mapActions, mapState } from 'vuex'
 export default defineComponent({
   name: 'PageIndex',
   computed: {
-    ...mapState('objects', ['namespaces']),
+    ...mapState('objects', ['interpretations']),
     params () {
       return this.$route.params.catchAll
     }
   },
   mounted () {
     const {
-      loadUniverse,
+      loadContext,
       parseUrl
     } = this
-    loadUniverse()
+    loadContext()
       .then(function () {
         parseUrl()
       })
@@ -33,23 +33,23 @@ export default defineComponent({
       })
   },
   methods: {
-    ...mapActions('objects', ['loadUniverse', 'isUnrivalObject']),
-    ...mapMutations('objects', ['setNamespace', 'setAddress']),
-    inUniverse (ns) {
-      console.log(typeof this.namespaces)
-      return ns in Object.keys(this.namespaces)
+    ...mapActions('objects', ['loadContext', 'isUnrivalObject']),
+    ...mapMutations('objects', ['setInterpretation', 'setAddress']),
+    inContext (ns) {
+      console.log(typeof this.interpretations)
+      return ns in Object.keys(this.interpretations)
     },
     async parseUrl () {
       const {
         setAddress,
-        setNamespace,
+        setInterpretation,
         params,
-        inUniverse,
+        inContext,
         isUnrivalObject
       } = this
       console.log(params)
       const paramsStart = params.split('/').slice(0)
-      const namespace = []
+      const interpretation = []
       // figure out which component to load
 
       // 1. get the parameters
@@ -58,23 +58,23 @@ export default defineComponent({
       const head = paramsStart[0]
 
       while (paramsStart.length) {
-        // should the current head be added to the namespace?
-        const prospectiveNamespace = namespace.join('/') + head
-        console.log('the prospective namespace is: ' + prospectiveNamespace)
-        if (inUniverse(prospectiveNamespace)) {
-          console.log('the propspective univere was found in the namespaces.  see:')
-          namespace.push(paramsStart.shift())
-          console.log('will set the namespace to: ')
-          console.log(namespace)
+        // should the current head be added to the interpretation?
+        const prospectiveInterpretation = interpretation.join('/') + head
+        console.log('the prospective interpretation is: ' + prospectiveInterpretation)
+        if (inContext(prospectiveInterpretation)) {
+          console.log('the propspective univere was found in the interpretations.  see:')
+          interpretation.push(paramsStart.shift())
+          console.log('will set the interpretation to: ')
+          console.log(interpretation)
         } else {
           const isObject = await isUnrivalObject(paramsStart)
           console.log(paramsStart)
           if (paramsStart.length > 1) {
             // if there are 2 + levels remaining, this can't be a valid object
-            console.error('something went wrong! the namespace is too long to be valid.')
+            console.error('something went wrong! the interpretation is too long to be valid.')
             return
           } else if (isObject) {
-            setNamespace(namespace)
+            setInterpretation(interpretation)
             setAddress(paramsStart.shift())
           } else {
             console.error('object does not exist')

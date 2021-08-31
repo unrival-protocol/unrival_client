@@ -2,8 +2,8 @@ export default function () {
   return {
     baseObject: {},
     baseAddress: {},
-    baseNamespace: '',
-    namespaces: {},
+    baseInterpretation: '',
+    interpretations: {},
     baseProofSucceeded: false
   }
 }
