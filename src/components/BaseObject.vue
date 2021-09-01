@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <component :is="componentFile" />
-    <base-interface v-if="baseObject.length && getInterface()" />
+<div>
+  <!--    <component :is="componentFile" /> -->
+    <base-interface v-if="baseObject.length && getInterface()" :interface-address="getInterface().address" />
   </div>
 </template>
 <script>
@@ -26,7 +26,7 @@ export default defineComponent({
     //  return component
     // },
     getInterface () {
-      return this.baseObject.find(row => row.type === 'interface') || null
+      return this.baseObject.find(row => row.interpretation === '/interface') || null
     }
   },
   computed: {

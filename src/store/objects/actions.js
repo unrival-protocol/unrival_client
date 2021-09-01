@@ -6,12 +6,12 @@ console.log('the app context:')
 console.log(contextAddress)
 
 export function loadObject ({ context, commit }, data) {
-  const endpoint = `${host}/object/${data.interpretation}/${data.address}`
+  const endpoint = `${host}/object/${data.value}`
   console.log(endpoint)
   return axios.get(endpoint)
     .then((response) => {
       // console.log(response.data)
-      commit('updateBaseObject', response.data)
+      commit('update_base' + data.interpretation.replace('/', '_'), response.data)
     })
     .catch((err) => {
       console.log(err)

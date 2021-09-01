@@ -1,6 +1,15 @@
+/* eslint-disable camelcase */
 
-export function updateBaseObject (state, val) {
+export function update_base_object (state, val) {
   state.baseObject = val
+}
+
+export function update_base_action (state, val) {
+  state.baseAction = val
+}
+
+export function update_base_interface (state, val) {
+  state.baseInterface = val
 }
 
 export function updateContext (state, val) {

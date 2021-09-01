@@ -1,15 +1,14 @@
 <template>
   <q-page class="flex flex-center">
     <div>
-      <h1>Unrival</h1>
-      {{ interpretations }}
+      <BaseObject />
     </div>
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-
+import BaseObject from '../components/BaseObject'
 import { mapMutations, mapActions, mapState } from 'vuex'
 
 export default defineComponent({
@@ -20,29 +19,42 @@ export default defineComponent({
       return this.$route.params.catchAll
     }
   },
+  components: {
+    BaseObject
+  },
   mounted () {
     const {
-      loadContext
-      // parseUrl
+      loadContext,
+      interpretObject
     } = this
     loadContext()
-    .then(function () {
-       parseUrl()
-    })
-    .catch((err) => {
-      console.error(err)
-     })
+      .then(function () {
+        // set the base address
+        interpretObject()
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   },
   methods: {
-    ...mapActions('objects', ['loadContext', 'isUnrivalObject']),
-    ...mapMutations('objects', ['setInterpretation', 'setAddress']),
+    ...mapActions('objects', ['loadContext', 'loadObject', 'isUnrivalObject']),
+    ...mapMutations('objects', ['setInterpretation']),
     inContext (interpretation) {
       console.log(typeof this.interpretations)
-      return ns in Object.keys(this.interpretations)
+      return interpretation in Object.keys(this.interpretations)
+    },
+    interpretObject () {
+      const {
+        params,
+        loadObject
+      } = this
+      console.log(params)
+      const interpretation = '/' + params
+      const value = this.interpretations[interpretation]
+      loadObject({ value, interpretation: '/object' })
     },
     async parseUrl () {
       const {
-        setAddress,
         setInterpretation,
         params,
         inContext,
@@ -76,7 +88,7 @@ export default defineComponent({
             return
           } else if (isObject) {
             setInterpretation(interpretation)
-            setAddress(paramsStart.shift())
+            // setAddress(paramsStart.shift())
           } else {
             console.error('object does not exist')
           }
