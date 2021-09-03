@@ -19,10 +19,10 @@ export function loadObject ({ context, commit }, data) {
 }
 
 export function proveObject ({ commit }, data) {
-  const endpoint = `${host}/object/${data.interpretation}/${data.address}/prove`
+  const endpoint = `${host}/prove/${data}`
   return axios.get(endpoint)
     .then((response) => {
-      // console.log(response.data)
+      console.log(response.data)
       commit('setObjectProved', response.data)
     })
     .catch((err) => {

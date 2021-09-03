@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          UNRIVAL
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Unrival v 0.0.1</div>
       </q-toolbar>
     </q-header>
 

@@ -4,8 +4,8 @@ export function update_base_object (state, val) {
   state.baseObject = val
 }
 
-export function update_base_action (state, val) {
-  state.baseAction = val
+export function update_base_iterator (state, val) {
+  state.baseIterator = val
 }
 
 export function update_base_interface (state, val) {

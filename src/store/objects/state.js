@@ -4,6 +4,7 @@ export default function () {
     baseAddress: {},
     baseInterface: {},
     baseInterpretation: '',
+    baseIterator: {},
     interpretations: {},
     baseProofSucceeded: false
   }
