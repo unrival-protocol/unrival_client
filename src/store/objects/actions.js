@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import { Notify } from 'quasar'
 
 const host = `${process.env.VUE_APP_SERVER_PROTOCOL}://${process.env.VUE_APP_SERVER_ADDRESS}`
 const contextAddress = process.env.VUE_APP_CONTEXT
@@ -7,7 +8,7 @@ console.log(contextAddress)
 
 export function loadObject ({ context, commit }, data) {
   const endpoint = `${host}/object/${data.value}`
-  console.log(endpoint)
+  console.log(data)
   return axios.get(endpoint)
     .then((response) => {
       // console.log(response.data)

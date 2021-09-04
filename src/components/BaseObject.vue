@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import { defineComponent, defineAsyncComponent } from 'vue'
 import BaseInterface from './BaseInterface'
 
@@ -15,16 +15,6 @@ export default defineComponent({
     BaseInterface
   },
   methods: {
-    ...mapActions('objects', ['loadObject']),
-    // importComponent (path) {
-    //  console.log(`./${path}.vue`)
-    //  this.loadObject(this.namespace, this.address)
-    //  return () => import(`./${path}.vue`)
-    // },
-    // async getComponentFile () {
-    //  const component = await this.importComponent(this.namespace)
-    //  return component
-    // },
     getInterface () {
       return this.baseObject.find(row => row.interpretation === '/interface') || null
     }
