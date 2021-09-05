@@ -8,3 +8,11 @@ export default defineComponent({
   name: 'App'
 })
 </script>
+<style>
+.text-brand {
+  color: #a2aa33;
+}
+.bg-brand {
+  background: #a2aa33;
+}
+</style>

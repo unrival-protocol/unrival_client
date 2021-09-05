@@ -16,7 +16,10 @@ export default defineComponent({
   },
   methods: {
     getInterface () {
-      return this.baseObject.find(row => row.interpretation === '/interface') || null
+      return this.baseObject.find(row => {
+        console.log(row.interpretation)
+        return row.interpretation === '/iterator/interface'
+      }) || null
     }
   },
   computed: {

@@ -1,1 +1,32 @@
 /* app global css */
+.bg-brand-primary {
+  background: #F9F6F0;
+
+}
+.text-brand-primary {
+  color: #F9F6F0;
+}
+
+.bg-brand-secondary {
+  background: #6F5B3E;
+
+}
+.text-brand-secondary {
+  color: #6F5B3E;
+
+}
+
+.bg-brand-ternary {
+  background: #C4AE78
+}
+
+.text-brand-ternary {
+  color: #C4AE78
+}
+
+.bg-brand-dark {
+  background: #171515
+}
+.text-brand-dark {
+  color: #171515
+}
